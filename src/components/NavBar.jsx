@@ -1,24 +1,36 @@
 import React from "react"
 
-function NavBar({
-  onPreviousClick,
-  onNextClick,
-  isPreviousDisabled,
-  isNextDisabled,
-}) {
-  return (
-    <div className="nav-bar">
-      <button onClick={onPreviousClick} disabled={isPreviousDisabled}>
-        Précédent
-      </button>
-      <button onClick={onNextClick} disabled={isNextDisabled}>
-        Suivant
-      </button>
-    </div>
-  )
+function NavBar(props) {
+  const { pokemonList, onPokemonSelect } = props
+  const pokemonButtons = pokemonList.map((pokemon, index) => (
+    <button key={index} onClick={() => onPokemonSelect(pokemon)}>
+      {pokemon.name}
+    </button>
+  ))
+
+  return <div className="navbar">{pokemonButtons}</div>
 }
 
 export default NavBar
+
+// function NavBar({
+//   onPreviousClick,
+//   onNextClick,
+//   isPreviousDisabled,
+//   isNextDisabled,
+// }) {
+//   return (
+//     <div className="nav-bar">
+//       <button onClick={onPreviousClick} disabled={isPreviousDisabled}>
+//         Précédent
+//       </button>
+//       <button onClick={onNextClick} disabled={isNextDisabled}>
+//         Suivant
+//       </button>
+//     </div>
+//   )
+// }
+
 // import React from "react"
 
 // function App() {

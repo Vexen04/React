@@ -4,7 +4,11 @@ import React, { useState } from "react"
 import NavBar from "./components/NavBar"
 
 function App() {
-  const [pokemonIndex, setPokemonIndex] = useState(0)
+  // const [pokemonIndex, setPokemonIndex] = useState(0)
+  const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const handlePokemonSelect = (pokemon) => {
+    setSelectedPokemon(pokemon)
+  }
   const pokemonList = [
     {
       name: "Bulbizarre",
@@ -127,32 +131,39 @@ function App() {
       pkmnTypes: ["Insecte", "Poison"],
     },
   ]
-
-  const handleNextClick = () => {
-    if (pokemonIndex < pokemonList.length - 1) {
-      setPokemonIndex(pokemonIndex + 1)
-    }
-  }
-
-  const handlePrevClick = () => {
-    if (pokemonIndex > 0) {
-      setPokemonIndex(pokemonIndex - 1)
-    }
-  }
   return (
     <div>
-      <NavBar
-        showPrevButton={pokemonIndex > 0}
-        showNextButton={pokemonIndex < pokemonList.length - 1}
-        onPreviousClick={handlePrevClick}
-        onNextClick={handleNextClick}
-      />
-      <PokemonCard pokemon={pokemonList[pokemonIndex]} />
+      <NavBar pokemonList={pokemonList} onPokemonSelect={handlePokemonSelect} />
+      <PokemonCard pokemon={selectedPokemon} />
     </div>
   )
 }
-
 export default App
+// -----------------------------------------------------------
+
+// const handleNextClick = () => {
+//   if (pokemonIndex < pokemonList.length - 1) {
+//     setPokemonIndex(pokemonIndex + 1)
+//   }
+// }
+
+// const handlePrevClick = () => {
+//   if (pokemonIndex > 0) {
+//     setPokemonIndex(pokemonIndex - 1)
+//   }
+// }
+
+// ----------------------------------------------------------
+
+//  ******   Buttons Previous/Next   *******
+
+//  <NavBar
+//  showPrevButton={pokemonIndex > 0}
+//  showNextButton={pokemonIndex < pokemonList.length - 1}
+//  onPreviousClick={handlePrevClick}
+//  onNextClick={handleNextClick}
+// />
+// <PokemonCard pokemon={pokemonList[pokemonIndex]} />
 
 // return (
 //   <div>
@@ -160,6 +171,8 @@ export default App
 //     <PokemonCard pokemon={pokemonList[1]} />
 //   </div>
 // )
+
+// -------------------------------------------------------------------
 
 // function App() {
 //   const [pokemonIndex, setPokemonIndex] = useState(0)
@@ -177,7 +190,8 @@ export default App
 
 //   return (
 //     <div>
-//       {/* //si est seulement si l'index est supérieur a 0 alors tu affiches le bouton précédant.  */}
+//   ***    {/* //si est seulement si l'index est supérieur a 0 alors tu affiches le bouton précédant.  */} ***
+
 //       {pokemonIndex > 0 && <button onClick={handlePrevClick}>Précédent</button>}
 //       {pokemonIndex < pokemonList.length - 1 && (
 //         <button onClick={handleNextClick}>Suivant</button>
